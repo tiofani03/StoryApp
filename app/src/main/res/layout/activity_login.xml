@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.LoginActivity">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimens_16dp"
+        android:layout_marginTop="@dimen/dimens_16dp"
+        android:layout_marginEnd="@dimen/dimens_16dp"
+        android:text="@string/app_name"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="@dimen/dimens_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_4dp"
+        android:text="Abadikan momenmu"
+        app:layout_constraintEnd_toEndOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEmail"
+        android:layout_width="@dimen/dimens_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimens_16dp"
+        android:layout_marginTop="@dimen/dimens_64dp"
+        android:layout_marginEnd="@dimen/dimens_16dp"
+        android:hint="Email"
+        app:hintEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubtitle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPassword"
+        android:layout_width="@dimen/dimens_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimens_16dp"
+        android:layout_marginTop="@dimen/dimens_16dp"
+        android:layout_marginEnd="@dimen/dimens_16dp"
+        android:hint="Password"
+        app:endIconMode="password_toggle"
+        app:hintEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilEmail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="@dimen/dimens_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_16dp"
+        app:layout_constraintEnd_toEndOf="@+id/materialButton"
+        app:layout_constraintStart_toStartOf="@+id/materialButton"
+        app:layout_constraintTop_toBottomOf="@id/materialButton">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dimens_48dp"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+            android:gravity="center"
+            android:text="Hello" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton"
+        android:layout_width="@dimen/dimens_0dp"
+        android:layout_height="@dimen/dimens_56dp"
+        android:layout_marginTop="@dimen/dimens_32dp"
+        android:padding="@dimen/dimens_8dp"
+        android:text="Login"
+        app:layout_constraintEnd_toEndOf="@+id/tilPassword"
+        app:layout_constraintStart_toStartOf="@+id/tilPassword"
+        app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
