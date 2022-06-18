@@ -12,13 +12,17 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.tiooooo.core.ui.base.BaseActivity
 import com.tiooooo.core.ui.camera.CameraActivity
+import com.tiooooo.core.utils.extensions.reduceFileImage
 import com.tiooooo.core.utils.extensions.rotateBitmap
 import com.tiooooo.core.utils.extensions.uriToFile
 import com.tiooooo.storyapp.databinding.ActivityAddStoryBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 import java.io.File
 
 class AddStoryActivity : BaseActivity<ActivityAddStoryBinding>() {
     override fun getViewBinding() = ActivityAddStoryBinding.inflate(layoutInflater)
+    private val viewModel: CreateStoryViewModel by viewModel()
     private var getFile: File? = null
 
     override fun initView() {
@@ -34,10 +38,37 @@ class AddStoryActivity : BaseActivity<ActivityAddStoryBinding>() {
 
     override fun initListener() {
         binding.btnAddPhoto.setOnClickListener {
-            showImagePickerOptions(this,object : PickerOptionListener {
+            showImagePickerOptions(this, object : PickerOptionListener {
                 override fun onTakeCameraSelected() = startCameraX()
                 override fun onChooseGallerySelected() = startGallery()
             })
+        }
+
+        binding.btnAddStory.setOnClickListener {
+            getFile?.let { file ->
+                val compressFile = reduceFileImage(file)
+                Timber.d("compressFile: $compressFile")
+                viewModel.createStories(
+                    binding.etSmall.text.toString(),
+                    compressFile
+                )
+            } ?: run {
+                Toast.makeText(this, "Please add photo", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun setSubscribeToLiveData() {
+        with(viewModel) {
+            createStories.observe(this@AddStoryActivity) {
+                if (it == false) {
+                    Toast.makeText(this@AddStoryActivity, "Story created", Toast.LENGTH_SHORT)
+                        .show()
+                    finish()
+                } else {
+                    Toast.makeText(this@AddStoryActivity, "Error", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -74,6 +105,7 @@ class AddStoryActivity : BaseActivity<ActivityAddStoryBinding>() {
                 BitmapFactory.decodeFile(myFile.path),
                 isBackCamera
             )
+            getFile = myFile
 
             binding.ivStoriesPreview.setImageBitmap(result)
         }

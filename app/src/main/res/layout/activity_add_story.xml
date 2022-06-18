@@ -75,11 +75,21 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnAddPhoto"
-
-                />
+                app:layout_constraintTop_toBottomOf="@id/btnAddPhoto" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAddStory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="@dimen/dimens_16dp"
+        android:layout_marginEnd="@dimen/dimens_16dp"
+        android:layout_marginBottom="@dimen/dimens_8dp"
+        android:text="Tambahkan Cerita"
+        app:cornerRadius="@dimen/dimens_8dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

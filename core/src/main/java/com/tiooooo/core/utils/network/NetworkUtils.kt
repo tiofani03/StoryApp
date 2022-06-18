@@ -4,10 +4,14 @@ import android.content.Context
 import android.os.Build
 import androidx.core.content.pm.PackageInfoCompat
 import com.google.gson.Gson
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.HttpException
 import timber.log.Timber
+import java.io.File
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -96,5 +100,10 @@ object NetworkUtils {
         }
 
         return message
+    }
+
+    fun File.toPart(partName: String): MultipartBody.Part {
+        val reqBody = this.asRequestBody("application/json".toMediaTypeOrNull())
+        return MultipartBody.Part.createFormData(partName, this.name, reqBody)
     }
 }
