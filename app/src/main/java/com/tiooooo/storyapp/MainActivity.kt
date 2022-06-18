@@ -1,61 +1,59 @@
 package com.tiooooo.storyapp
 
-import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
+import android.content.Intent
+import android.view.animation.AnimationUtils
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.tiooooo.core.ui.base.BaseActivity
 import com.tiooooo.storyapp.databinding.ActivityMainBinding
+import com.tiooooo.storyapp.ui.add.AddStoryActivity
+import com.tiooooo.storyapp.ui.main.MainViewModel
+import com.tiooooo.storyapp.ui.main.StoryAdapter
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
+    private val viewModel: MainViewModel by viewModel()
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        super.onCreate(savedInstanceState)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+    override fun initView() {
+        viewModel.getListStories()
         setSupportActionBar(binding.toolbar)
+    }
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+    override fun initListener() {
+        with(binding) {
+            btnCreateActivity.setOnClickListener {
+                startActivity(Intent(this@MainActivity, AddStoryActivity::class.java))
+            }
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAnchorView(R.id.fab)
-                .setAction("Action", null).show()
+            swipeStory.setOnRefreshListener {
+                viewModel.getListStories()
+                binding.swipeStory.isRefreshing = false
+            }
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
+    override fun setSubscribeToLiveData() {
+        with(viewModel) {
+            listStories.observe(this@MainActivity) {
+                binding.rvStories.apply {
+                    isVisible = it.isNotEmpty()
+                    adapter = StoryAdapter(it)
+                    layoutManager = LinearLayoutManager(this@MainActivity)
+                    val layoutAnimationController = AnimationUtils.loadLayoutAnimation(
+                        context,
+                        com.tiooooo.core.R.anim.layout_animation_fall_down
+                    )
+                    this.layoutAnimation = layoutAnimationController
+                }
+            }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+            listState.observe(this@MainActivity){
+                binding.shimmerCard.isVisible = it
+            }
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }
+    override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
+
 }

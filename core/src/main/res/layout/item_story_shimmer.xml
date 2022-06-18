@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?attr/materialCardViewElevatedStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dimens_8dp"
+    android:layout_marginTop="@dimen/dimens_8dp"
+    android:layout_marginEnd="@dimen/dimens_8dp"
+    android:background="#DDDDDD">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimens_16dp"
+        android:orientation="vertical">
+
+
+        <View
+            android:id="@+id/ivStories"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_200dp"
+            android:background="#7F000000"
+            android:scaleType="centerCrop" />
+
+        <View
+            android:id="@+id/tvName"
+            android:layout_width="@dimen/dimens_100dp"
+            android:layout_height="@dimen/dimens_24dp"
+            android:layout_marginTop="@dimen/dimens_8dp"
+            android:background="#7F000000" />
+
+
+        <View
+            android:id="@+id/tvDate"
+            android:layout_width="@dimen/dimens_157dp"
+            android:layout_height="@dimen/dimens_16dp"
+            android:layout_marginTop="@dimen/dimens_8dp"
+
+            android:background="#7F000000" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</com.facebook.shimmer.ShimmerFrameLayout>

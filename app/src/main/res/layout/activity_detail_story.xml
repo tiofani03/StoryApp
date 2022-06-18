@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detail.DetailStoryActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="@dimen/dimens_1dp"
+        app:title="Detail Story" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvImageStory"
+                style="@style/Widget.Material3.CardView.Filled"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimens_16dp"
+                android:layout_marginTop="@dimen/dimens_16dp"
+                android:layout_marginEnd="@dimen/dimens_16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivStories"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_157dp"
+                    android:scaleType="centerCrop"
+                    android:transitionName="ivStories"
+                    tools:src="@tools:sample/backgrounds/scenic" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_16dp"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:textStyle="bold"
+                android:transitionName="tvName"
+                app:layout_constraintEnd_toEndOf="@+id/cvImageStory"
+                app:layout_constraintStart_toStartOf="@+id/cvImageStory"
+                app:layout_constraintTop_toBottomOf="@+id/cvImageStory"
+                tools:text="Tio Fani" />
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="wrap_content"
+                android:text="Ditambahkan pada 12 Juli 20:18"
+                android:textSize="@dimen/text_captions_12sp"
+                android:transitionName="tvDate"
+                app:layout_constraintEnd_toEndOf="@+id/tvName"
+                app:layout_constraintStart_toStartOf="@+id/tvName"
+                app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+
+            <TextView
+                android:id="@+id/tvContent"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="@dimen/dimens_0dp"
+                android:layout_marginTop="@dimen/dimens_16dp"
+                android:layout_marginBottom="@dimen/dimens_16dp"
+                android:gravity="top|start"
+                android:transitionName="tvContent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tvDate"
+                app:layout_constraintStart_toStartOf="@+id/tvDate"
+                app:layout_constraintTop_toBottomOf="@+id/tvDate"
+                tools:text="tes" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

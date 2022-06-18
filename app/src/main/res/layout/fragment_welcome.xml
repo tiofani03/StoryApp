@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.auth.fragment.WelcomeFragment">
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieHello"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        app:layout_constraintDimensionRatio="1:1"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="success.json"
+        app:lottie_loop="true"
+        app:lottie_speed="0.5" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieCheck"
+            android:layout_width="@dimen/dimens_144dp"
+            android:layout_height="@dimen/dimens_144dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimens_100dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="success_check.json"
+            app:lottie_loop="true"
+            app:lottie_speed="2.00" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selamat akun kamu sudah aktif sekarang"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimens_16dp"
+            android:layout_marginTop="@dimen/dimens_8dp"
+            android:layout_marginEnd="@dimen/dimens_16dp"
+            android:gravity="center_horizontal"
+            android:text="Tunggu ya kami sedang mempersiapkan aplikasi, jangan khawatir halaman ini akan tertutup otomatis" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</FrameLayout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.add.AddStoryActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="@dimen/dimens_1dp"
+        app:title="Tambah Story" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvTextAddStory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimens_16dp"
+                android:layout_marginTop="@dimen/dimens_16dp"
+                android:layout_marginEnd="@dimen/dimens_16dp"
+                android:text="Tulis cerita kamu"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimens_16dp"
+                android:layout_marginTop="@dimen/dimens_8dp"
+                android:layout_marginEnd="@dimen/dimens_16dp"
+                android:background="@drawable/bg_edit_text_rounded_4dp"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/dimens_14dp"
+                android:paddingTop="@dimen/dimens_12dp"
+                android:paddingEnd="@dimen/dimens_14dp"
+                android:paddingBottom="@dimen/dimens_12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTextAddStory" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddPhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimens_16dp"
+                android:layout_marginTop="@dimen/dimens_8dp"
+                android:text="Tambahkan gambar"
+                app:cornerRadius="@dimen/dimens_8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_small" />
+
+
+            <ImageView
+                android:id="@+id/ivStoriesPreview"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="@dimen/dimens_200dp"
+                android:layout_marginStart="@dimen/dimens_16dp"
+                android:layout_marginTop="@dimen/dimens_16dp"
+                android:layout_marginEnd="@dimen/dimens_16dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnAddPhoto"
+
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

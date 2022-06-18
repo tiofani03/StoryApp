@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="?attr/materialCardViewElevatedStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dimens_8dp"
+    android:layout_marginTop="@dimen/dimens_8dp"
+    android:layout_marginEnd="@dimen/dimens_8dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimens_16dp"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivStories"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_200dp"
+            android:scaleType="centerCrop"
+            android:transitionName="ivStories" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimens_8dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:textSize="@dimen/dimens_txt_18sp"
+            android:textStyle="bold"
+            android:transitionName="tvName"
+            tools:text="Tio Fani" />
+
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:textSize="@dimen/text_captions_12sp"
+            android:transitionName="tvDate"
+            tools:text="Diposting pada 12:00" />
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="@dimen/dimens_0dp"
+            android:layout_height="@dimen/dimens_0dp"
+            android:transitionName="tvContent"
+            android:visibility="gone" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</com.google.android.material.card.MaterialCardView>
