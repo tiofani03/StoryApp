@@ -1,12 +1,5 @@
 <resources>
     <string name="app_name">StoryApp</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
@@ -45,4 +38,34 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_exit">Keluar</string>
+    <string name="text_about">Tentang</string>
+    <string name="text_version_app">Versi %s %s</string>
+    <string name="please_add_photo">Tambahkan foto</string>
+    <string name="failed_to_create_story">Gagal menambahkan cerita</string>
+    <string name="success_created">Berhasil menambahkan</string>
+    <string name="permission_denied">Tidak mendapatkan permission</string>
+    <string name="choose_image">Pilih Gambar</string>
+    <string name="take_photo">Pilih dari kamera</string>
+    <string name="choose_from_gallery">Pilih dari galeri</string>
+    <string name="added_at">Ditambahkan pada %s</string>
+    <string name="text_create_story">Tambah Cerita baru</string>
+    <string name="text_write_your_story">Tulis cerita kamu</string>
+    <string name="add_image">Tambahkan gambar</string>
+    <string name="add_story">Tambahkan Cerita</string>
+    <string name="text_detail_story">Detail Story</string>
+    <string name="text_not_have_account_yet">Belum punya akun? Daftar sekarang</string>
+    <string name="text_login">Login</string>
+    <string name="text_password">Password</string>
+    <string name="text_email">Email</string>
+    <string name="take_your_moment">Abadikan momenmu</string>
+    <string name="text_your_account_active">Selamat akun kamu sudah aktif sekarang</string>
+    <string name="text_waiting">Tunggu ya kami sedang mempersiapkan aplikasi, jangan khawatir halaman ini akan tertutup otomatis</string>
+    <string name="text_create_account">Buat akun</string>
+    <string name="text_desc_create_account">Buat akun baru dengan email aja</string>
+    <string name="text_name">Nama</string>
+    <string name="create_account">Buat akun</string>
+    <string name="success_register">Registrasi berhasil</string>
+    <string name="login_failed">Login gagal</string>
+    <string name="login_success">Login berhasil</string>
 </resources>

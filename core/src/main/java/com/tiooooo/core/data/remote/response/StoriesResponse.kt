@@ -1,7 +1,7 @@
 package com.tiooooo.core.data.remote.response
 
 import com.google.gson.annotations.SerializedName
-import com.tiooooo.core.model.StoriesViewParam
+import com.tiooooo.core.model.StoryViewParam
 import com.tiooooo.core.ui.base.BaseApiResponse
 
 
@@ -18,7 +18,7 @@ data class StoriesResponse(
     @SerializedName("lon") val lon: Double? = null,
     @SerializedName("lat") val lat: Double? = null
 ) {
-    fun toClean(): StoriesViewParam = StoriesViewParam(
+    fun toClean(): StoryViewParam = StoryViewParam(
         id.orEmpty(),
         name.orEmpty(),
         photoUrl.orEmpty(),

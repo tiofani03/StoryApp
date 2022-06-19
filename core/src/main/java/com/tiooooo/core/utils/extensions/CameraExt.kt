@@ -17,6 +17,10 @@ import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
+/*
+form dicoding academy
+ */
+
 private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 
 val timeStamp: String = SimpleDateFormat(

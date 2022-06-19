@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.add.AddStoryActivity">
+    tools:context=".ui.create.CreateStoryActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:elevation="@dimen/dimens_1dp"
-        app:title="Tambah Story" />
+        app:title="@string/text_create_story" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:layout_marginStart="@dimen/dimens_16dp"
                 android:layout_marginTop="@dimen/dimens_16dp"
                 android:layout_marginEnd="@dimen/dimens_16dp"
-                android:text="Tulis cerita kamu"
+                android:text="@string/text_write_your_story"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimens_16dp"
                 android:layout_marginTop="@dimen/dimens_8dp"
-                android:text="Tambahkan gambar"
+                android:text="@string/add_image"
                 app:cornerRadius="@dimen/dimens_8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_small" />
@@ -75,7 +75,8 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnAddPhoto" />
+                app:layout_constraintTop_toBottomOf="@id/btnAddPhoto"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
@@ -89,7 +90,7 @@
         android:layout_marginStart="@dimen/dimens_16dp"
         android:layout_marginEnd="@dimen/dimens_16dp"
         android:layout_marginBottom="@dimen/dimens_8dp"
-        android:text="Tambahkan Cerita"
+        android:text="@string/add_story"
         app:cornerRadius="@dimen/dimens_8dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

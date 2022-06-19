@@ -24,37 +24,38 @@
         android:layout_width="@dimen/dimens_0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimens_4dp"
-        android:text="Abadikan momenmu"
+        android:text="@string/take_your_moment"
         app:layout_constraintEnd_toEndOf="@id/tvTitle"
         app:layout_constraintStart_toStartOf="@id/tvTitle"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
-
-    <!--    <com.tiooooo.core.ui.custom.MyCustomEditText-->
-    <!--        android:id="@+id/tilEmail"-->
-    <!--        android:layout_width="@dimen/dimens_0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="@dimen/dimens_16dp"-->
-    <!--        android:layout_marginTop="@dimen/dimens_64dp"-->
-    <!--        android:layout_marginEnd="@dimen/dimens_16dp"-->
-    <!--        android:hint="Email"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/tvSubtitle" />-->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilEmail"
+    <TextView
+        android:id="@+id/tvTextEmail"
         android:layout_width="@dimen/dimens_0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimens_16dp"
-        android:layout_marginTop="@dimen/dimens_16dp"
+        android:layout_marginTop="@dimen/dimens_32dp"
         android:layout_marginEnd="@dimen/dimens_16dp"
-        android:hint="Email"
-        app:hintEnabled="true"
+        android:text="@string/text_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSubtitle">
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitle" />
 
-        <com.google.android.material.textfield.TextInputEditText
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEmail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="@dimen/dimens_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimens_16dp"
+        android:layout_marginTop="@dimen/dimens_8dp"
+        android:layout_marginEnd="@dimen/dimens_16dp"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTextEmail">
+
+        <com.tiooooo.core.ui.custom.MyCustomEditText
             android:id="@+id/edtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,21 +64,34 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilPassword"
+    <TextView
+        android:id="@+id/tvTextPassword"
         android:layout_width="@dimen/dimens_0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimens_16dp"
         android:layout_marginTop="@dimen/dimens_16dp"
         android:layout_marginEnd="@dimen/dimens_16dp"
-        android:hint="Password"
-        app:endIconMode="password_toggle"
-        app:hintEnabled="true"
+        android:text="@string/text_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilEmail">
+        app:layout_constraintTop_toBottomOf="@id/tilEmail" />
 
-        <com.google.android.material.textfield.TextInputEditText
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="@dimen/dimens_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimens_16dp"
+        android:layout_marginTop="@dimen/dimens_8dp"
+        android:layout_marginEnd="@dimen/dimens_16dp"
+        app:endIconMode="password_toggle"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTextPassword">
+
+        <com.tiooooo.core.ui.custom.MyCustomEditText
             android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,8 +104,10 @@
         android:layout_width="@dimen/dimens_0dp"
         android:layout_height="@dimen/dimens_56dp"
         android:layout_marginTop="@dimen/dimens_32dp"
+        android:enabled="false"
         android:padding="@dimen/dimens_8dp"
-        android:text="Login"
+        android:text="@string/text_login"
+        app:cornerRadius="@dimen/dimens_8dp"
         app:layout_constraintEnd_toEndOf="@+id/tilPassword"
         app:layout_constraintStart_toStartOf="@+id/tilPassword"
         app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
@@ -101,8 +117,9 @@
         android:id="@+id/tvRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimens_8dp"
         android:layout_marginTop="@dimen/dimens_8dp"
-        android:text="Belum punya akun? Daftar sekarang"
+        android:text="@string/text_not_have_account_yet"
         app:layout_constraintStart_toStartOf="@id/materialButton"
         app:layout_constraintTop_toBottomOf="@id/materialButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

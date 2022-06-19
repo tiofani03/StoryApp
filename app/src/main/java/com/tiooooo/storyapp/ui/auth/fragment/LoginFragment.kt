@@ -5,11 +5,16 @@ import android.content.Intent
 import android.widget.Toast
 import androidx.navigation.Navigation
 import com.tiooooo.core.ui.base.BaseFragment
-import com.tiooooo.storyapp.MainActivity
+import com.tiooooo.core.utils.constant.InfoEnum
+import com.tiooooo.core.utils.extensions.TextListener
+import com.tiooooo.core.utils.extensions.getTextWatcher
+import com.tiooooo.core.utils.extensions.isEmailValid
+import com.tiooooo.core.utils.extensions.snackBar
 import com.tiooooo.storyapp.R
 import com.tiooooo.storyapp.databinding.FragmentLoginBinding
 import com.tiooooo.storyapp.ui.auth.AuthActivity
 import com.tiooooo.storyapp.ui.auth.AuthViewModel
+import com.tiooooo.storyapp.ui.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -33,6 +38,25 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, AuthActivity>(R.layout.
                 val password = edtPassword.text.toString()
                 viewModel.login(email, password)
             }
+
+            edtEmail.addTextChangedListener(getTextWatcher { type, s ->
+                when (type) {
+                    TextListener.AFTER -> {
+                        viewModel.textEmailLogin.value = s.isEmailValid()
+                        viewModel.validateLoginButton()
+                    }
+                }
+            })
+
+            edtPassword.addTextChangedListener(getTextWatcher { type, s ->
+                when (type) {
+                    TextListener.AFTER -> {
+                        viewModel.textPasswordLogin.value = s.length >= 6
+                        viewModel.validateLoginButton()
+                    }
+                }
+            })
+
         }
     }
 
@@ -40,22 +64,27 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, AuthActivity>(R.layout.
         viewModel.login.observe(viewLifecycleOwner) {
             it?.let {
                 startActivity(Intent(requireContext(), MainActivity::class.java))
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.login_success),
+                    Toast.LENGTH_SHORT
+                ).show()
                 parentActivity.finish()
             } ?: run {
-                Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_SHORT).show()
+                snackBar(getString(R.string.login_failed), InfoEnum.DANGER)
             }
         }
 
         viewModel.loginState.observe(viewLifecycleOwner) {
-            showToast("$it")
+            populateLoadingDialog(it)
         }
 
         viewModel.loginError.observe(viewLifecycleOwner) {
-            showToast(it)
+            snackBar(it, InfoEnum.DANGER)
         }
-    }
 
-    private fun showToast(text: String) {
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+        viewModel.btnVerificationLogin.observe(viewLifecycleOwner) {
+            binding.materialButton.isEnabled = it
+        }
     }
 }
