@@ -2,7 +2,7 @@ package com.tiooooo.core.data.repo
 
 import com.tiooooo.core.contract.StoriesRepositoryContract
 import com.tiooooo.core.data.remote.network.StoriesService
-import com.tiooooo.core.model.StoriesViewParam
+import com.tiooooo.core.model.StoryViewParam
 import com.tiooooo.core.utils.States
 import com.tiooooo.core.utils.network.NetworkUtils.getErrorMessage
 import com.tiooooo.core.utils.network.NetworkUtils.toPart
@@ -15,11 +15,11 @@ import timber.log.Timber
 import java.io.File
 
 class StoriesRepository(private val service: StoriesService) : StoriesRepositoryContract {
-    override suspend fun getStories(): Flow<States<ArrayList<StoriesViewParam>>> = flow {
+    override suspend fun getStories(): Flow<States<ArrayList<StoryViewParam>>> = flow {
         try {
             emit(States.Loading())
             val response = service.getStories()
-            val listStories = ArrayList<StoriesViewParam>()
+            val listStories = ArrayList<StoryViewParam>()
             listStories.addAll(response.listStory?.map {
                 it.toClean()
             } ?: arrayListOf())

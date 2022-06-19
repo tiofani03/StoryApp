@@ -1,7 +1,7 @@
 package com.tiooooo.storyapp.ui.detail
 
 import coil.load
-import com.tiooooo.core.model.StoriesViewParam
+import com.tiooooo.core.model.StoryViewParam
 import com.tiooooo.core.ui.base.BaseActivity
 import com.tiooooo.core.utils.extensions.toDate
 import com.tiooooo.core.utils.extensions.toDateString
@@ -11,12 +11,12 @@ import com.tiooooo.storyapp.databinding.ActivityDetailStoryBinding
 class DetailStoryActivity : BaseActivity<ActivityDetailStoryBinding>() {
 
     override fun initView() {
-        val story = intent.getParcelableExtra<StoriesViewParam>(EXTRA_STORY)
+        val story = intent.getParcelableExtra<StoryViewParam>(EXTRA_STORY)
         with(binding) {
-            isUsingToolbar(toolbar,true)
+            isUsingToolbar(toolbar, true)
             story?.let {
                 tvName.text = it.name
-                tvDate.text = "Ditambahkan pada " + it.createdAt.toDate().toDateString()
+                tvDate.text = getString(R.string.added_at, it.createdAt.toDate().toDateString())
                 tvContent.text = it.description
 
                 ivStories.load(it.photoUrl) {

@@ -7,9 +7,11 @@
         <entry key="app/src/main/res/drawable/bg_disable_grey_rounded_4dp.xml" value="0.1305" />
         <entry key="app/src/main/res/drawable/bg_disable_grey_rounded_4dp_stroke_grey.xml" value="0.1535" />
         <entry key="app/src/main/res/drawable/bg_edit_text_rounded_4dp.xml" value="0.1535" />
+        <entry key="app/src/main/res/drawable/bg_white_rounded_4dp_stroke_grey.xml" value="0.1275" />
         <entry key="app/src/main/res/drawable/bg_white_rounded_4dp_stroke_red.xml" value="0.1535" />
         <entry key="app/src/main/res/drawable/bg_white_stoke_grey_r4.xml" value="0.1535" />
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_about.xml" value="0.27794871794871795" />
         <entry key="app/src/main/res/layout/activity_add_story.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_detail_story.xml" value="0.2760879516601562" />
@@ -23,11 +25,14 @@
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.14377441406249997" />
         <entry key="app/src/main/res/layout/fragment_welcome.xml" value="0.13336791992187502" />
         <entry key="app/src/main/res/layout/item_story.xml" value="0.252740478515625" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.27794871794871795" />
+        <entry key="core/src/main/res/drawable/bg_white_rounded_4dp_stroke_red.xml" value="0.1295" />
         <entry key="core/src/main/res/drawable/ic_capture.xml" value="0.1305" />
         <entry key="core/src/main/res/drawable/ic_switch_camera.xml" value="0.1305" />
         <entry key="core/src/main/res/layout/activity_camera.xml" value="0.27794871794871795" />
         <entry key="core/src/main/res/layout/item_story.xml" value="0.1" />
         <entry key="core/src/main/res/layout/item_story_shimmer.xml" value="0.10833333333333334" />
+        <entry key="core/src/main/res/layout/layout_error.xml" value="0.1962962962962963" />
         <entry key="core/src/main/res/layout/layout_loading.xml" value="0.1" />
       </map>
     </option>

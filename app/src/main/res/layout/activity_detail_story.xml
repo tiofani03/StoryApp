@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:elevation="@dimen/dimens_1dp"
-        app:title="Detail Story" />
+        app:title="@string/text_detail_story" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -41,6 +41,7 @@
                     android:layout_height="@dimen/dimens_157dp"
                     android:scaleType="centerCrop"
                     android:transitionName="ivStories"
+                    tools:ignore="ContentDescription"
                     tools:src="@tools:sample/backgrounds/scenic" />
 
             </com.google.android.material.card.MaterialCardView>
@@ -63,12 +64,12 @@
                 android:id="@+id/tvDate"
                 android:layout_width="@dimen/dimens_0dp"
                 android:layout_height="wrap_content"
-                android:text="Ditambahkan pada 12 Juli 20:18"
                 android:textSize="@dimen/text_captions_12sp"
                 android:transitionName="tvDate"
                 app:layout_constraintEnd_toEndOf="@+id/tvName"
                 app:layout_constraintStart_toStartOf="@+id/tvName"
-                app:layout_constraintTop_toBottomOf="@+id/tvName" />
+                app:layout_constraintTop_toBottomOf="@+id/tvName"
+                tools:text="Ditambahkan pada 12 Juli 20:18" />
 
 
             <TextView
@@ -83,7 +84,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/tvDate"
                 app:layout_constraintStart_toStartOf="@+id/tvDate"
                 app:layout_constraintTop_toBottomOf="@+id/tvDate"
-                tools:text="tes" />
+                tools:text="@string/lorem_ipsum" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

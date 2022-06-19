@@ -10,7 +10,7 @@ import com.tiooooo.core.ui.custom.LoadingDialog.displayLoadingDialog
 import com.tiooooo.core.ui.custom.LoadingDialog.hideLoadingDialog
 import org.koin.android.ext.android.inject
 
-abstract class BaseActivity<VB : ViewBinding>() : AppCompatActivity() {
+abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     lateinit var binding: VB
     private val context: Context by inject()
@@ -40,8 +40,8 @@ abstract class BaseActivity<VB : ViewBinding>() : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    fun isUsingToolbar(toolbar: androidx.appcompat.widget.Toolbar, isUsing: Boolean? = false){
-        if (isUsing == true){
+    fun isUsingToolbar(toolbar: androidx.appcompat.widget.Toolbar, isUsing: Boolean? = false) {
+        if (isUsing == true) {
             setSupportActionBar(toolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
@@ -50,6 +50,10 @@ abstract class BaseActivity<VB : ViewBinding>() : AppCompatActivity() {
 
     fun showLoading() = displayLoadingDialog()
     fun hideLoading() = hideLoadingDialog()
+    fun populateLoadingDialog(state: Boolean? = false) {
+        if (state == true) displayLoadingDialog()
+        else hideLoadingDialog()
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieError"
+        android:layout_width="@dimen/dimens_300dp"
+        android:layout_height="@dimen/dimens_300dp"
+        android:layout_gravity="center"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="empty_state_story.json"
+        app:lottie_loop="true"
+        app:lottie_speed="1.00" />
+
+    <TextView
+        android:id="@+id/tvInfo"
+        android:layout_width="@dimen/dimens_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_8dp"
+        android:gravity="center"
+        android:text="@string/memuat"
+        app:layout_constraintEnd_toEndOf="@+id/lottieError"
+        app:layout_constraintStart_toStartOf="@+id/lottieError"
+        app:layout_constraintTop_toBottomOf="@+id/lottieError" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnTryAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_8dp"
+        android:text="@string/try_again"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="@+id/lottieError"
+        app:layout_constraintStart_toStartOf="@+id/lottieError"
+        app:layout_constraintTop_toBottomOf="@+id/tvInfo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

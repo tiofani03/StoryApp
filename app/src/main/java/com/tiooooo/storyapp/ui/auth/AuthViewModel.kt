@@ -3,19 +3,15 @@ package com.tiooooo.storyapp.ui.auth
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.tiooooo.core.contract.AuthRepositoryContract
-import com.tiooooo.core.data.local.UserPreference
 import com.tiooooo.core.model.LoginViewParam
 import com.tiooooo.core.utils.States
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class AuthViewModel(
     private val authRepository: AuthRepositoryContract,
-    private val userPreference: UserPreference
 ) : ViewModel() {
 
     val loginState = MutableLiveData<Boolean>()
@@ -23,7 +19,6 @@ class AuthViewModel(
     val loginError = MutableLiveData<String>()
     fun login(email: String, password: String) {
         viewModelScope.launch {
-            Timber.d("login : $email, $password")
             authRepository.login(email, password).collectLatest {
                 when (it) {
                     is States.Loading -> loginState.value = true
@@ -40,10 +35,25 @@ class AuthViewModel(
         }
     }
 
-    val isLogin = MutableLiveData<Boolean>()
-    fun isLogin(): LiveData<Boolean> {
-        return userPreference.isLogin().asLiveData()
-    }
+    val textEmailLogin = MutableLiveData<Boolean>()
+    val textPasswordLogin = MutableLiveData<Boolean>()
+    val btnVerificationLogin = MutableLiveData<Boolean>()
+
+    fun validateLoginButton(): Boolean =
+        (textEmailLogin.value == true && textPasswordLogin.value == true).also {
+            btnVerificationLogin.value = it
+        }
+
+
+    val textEmailRegister = MutableLiveData<Boolean>()
+    val textPasswordRegister = MutableLiveData<Boolean>()
+    val textNameRegister = MutableLiveData<Boolean>()
+    val btnVerificationRegister = MutableLiveData<Boolean>()
+
+    fun validateRegisterButton(): Boolean =
+        (textEmailRegister.value == true && textPasswordRegister.value == true && textNameRegister.value == true).also {
+            btnVerificationRegister.value = it
+        }
 
 
     fun getToken(): LiveData<String> = authRepository.getToken()

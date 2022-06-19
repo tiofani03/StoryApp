@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="success_color">#5cb85c</color>
+    <color name="info_color">#0275d8</color>
+    <color name="warning_color">#f0ad4e</color>
+    <color name="danger_color">#dc3545</color>
+
+    <color name="grey_600">#757575</color>
+    <color name="grey">#D8D8D8</color>
+    <color name="gray_disable_field">#EFEFEF</color>
+    <color name="grayscale_stroke">#D0D0D0</color>
+
+</resources>

@@ -9,7 +9,7 @@ import com.tiooooo.core.R
 import timber.log.Timber
 
 object LoadingDialog {
-    var dialog: Dialog? = null
+    private var dialog: Dialog? = null
     fun Activity.displayLoadingDialog() {
         dialog = Dialog(this)
         dialog?.apply {
@@ -25,7 +25,7 @@ object LoadingDialog {
         }
     }
 
-    fun Activity.hideLoadingDialog() {
+    fun hideLoadingDialog() {
         try {
             if (dialog != null) dialog?.dismiss()
             else dialog?.dismiss()

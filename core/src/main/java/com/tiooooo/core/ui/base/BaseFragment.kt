@@ -51,7 +51,7 @@ abstract class BaseFragment<out VB : ViewBinding, out A : Activity>(private val 
 
     fun populateLoadingDialog(state: Boolean? = false) {
         if (state == true) parentActivity.displayLoadingDialog()
-        else parentActivity.hideLoadingDialog()
+        else hideLoadingDialog()
     }
 
     override fun onDestroyView() {
