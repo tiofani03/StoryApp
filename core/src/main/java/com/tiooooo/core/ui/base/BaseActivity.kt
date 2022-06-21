@@ -2,8 +2,6 @@ package com.tiooooo.core.ui.base
 
 import android.content.Context
 import android.content.pm.ActivityInfo
-import android.widget.Toolbar
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.tiooooo.core.ui.custom.LoadingDialog.displayLoadingDialog

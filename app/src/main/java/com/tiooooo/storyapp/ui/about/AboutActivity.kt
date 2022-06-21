@@ -1,6 +1,5 @@
 package com.tiooooo.storyapp.ui.about
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import com.tiooooo.core.ui.base.BaseActivity
 import com.tiooooo.storyapp.BuildConfig
@@ -14,7 +13,6 @@ class AboutActivity : BaseActivity<ActivityAboutBinding>() {
     override fun getViewBinding() = ActivityAboutBinding.inflate(layoutInflater)
     private val viewModel: AboutViewModel by viewModel()
 
-    @SuppressLint("SetTextI18n")
     override fun initView() {
         isUsingToolbar(binding.toolbar, true)
         binding.tvAppVersion.text =
