@@ -11,7 +11,6 @@ import com.tiooooo.storyapp.ui.auth.AuthActivity
 import com.tiooooo.storyapp.ui.auth.AuthViewModel
 import com.tiooooo.storyapp.ui.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 
 class SplashFragment : BaseFragment<FragmentSplashBinding, AuthActivity>(R.layout.fragment_splash) {

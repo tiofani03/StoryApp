@@ -1,5 +1,6 @@
 package com.tiooooo.storyapp.ui.main
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,21 +14,27 @@ class MainViewModel(
     private val storiesRepositoryContract: StoriesRepositoryContract,
 ) :
     ViewModel() {
-    val listStories = MutableLiveData<ArrayList<StoryViewParam>>()
-    val listState = MutableLiveData<Boolean>()
-    val listError = MutableLiveData<String>()
+
+    private val _stories = MutableLiveData<ArrayList<StoryViewParam>>()
+    private val _storiesState = MutableLiveData<Boolean>()
+    private val _storiesError = MutableLiveData<String>()
+
+
+    val listStories: LiveData<ArrayList<StoryViewParam>> get() = _stories
+    val listState: LiveData<Boolean> get() = _storiesState
+    val listError: LiveData<String> get() = _storiesError
 
     fun getStories() = viewModelScope.launch {
         storiesRepositoryContract.getStories().collectLatest {
             when (it) {
-                is States.Loading -> listState.value = true
+                is States.Loading -> _storiesState.value = true
                 is States.Success -> {
-                    listState.value = false
-                    it.data?.let { data -> listStories.value = data }
+                    _storiesState.value = false
+                    it.data?.let { data -> _stories.value = data }
                 }
                 is States.Error -> {
-                    listState.value = false
-                    it.message?.let { error -> listError.value = error }
+                    _storiesState.value = false
+                    it.message?.let { error -> _storiesError.value = error }
                 }
             }
         }

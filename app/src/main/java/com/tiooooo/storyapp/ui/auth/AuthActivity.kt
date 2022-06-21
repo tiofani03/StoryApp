@@ -1,10 +1,9 @@
 package com.tiooooo.storyapp.ui.auth
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.tiooooo.storyapp.R
