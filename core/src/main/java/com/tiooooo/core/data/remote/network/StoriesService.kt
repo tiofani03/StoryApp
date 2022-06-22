@@ -13,8 +13,8 @@ import retrofit2.http.Query
 interface StoriesService {
     @GET("stories")
     suspend fun getStories(
-//        @Query("page") page: Int,
-        @Query("size") size: Int ? = 16,
+        @Query("page") page: Int ? = 1,
+        @Query("size") size: Int ? = 10,
         @Query("location") location: Int? = 0
     ): ListStoriesResponse
 

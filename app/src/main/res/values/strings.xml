@@ -68,4 +68,5 @@
     <string name="success_register">Registrasi berhasil</string>
     <string name="login_failed">Login gagal</string>
     <string name="login_success">Login berhasil</string>
+    <string name="cannot_fetch_data">Tidak dapat mengambil data</string>
 </resources>

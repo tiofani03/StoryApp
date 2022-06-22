@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.tiooooo.core.model.StoryViewParam
@@ -15,8 +17,18 @@ import com.tiooooo.storyapp.R
 import com.tiooooo.storyapp.databinding.ItemStoryBinding
 import com.tiooooo.storyapp.ui.detail.DetailStoryActivity
 
-class StoryAdapter(private val listStory: ArrayList<StoryViewParam>) :
-    RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
+class StoryAdapter :
+    PagingDataAdapter<StoryViewParam, StoryAdapter.StoryViewHolder>(Companion) {
+
+    companion object : DiffUtil.ItemCallback<StoryViewParam>() {
+        override fun areItemsTheSame(oldItem: StoryViewParam, newItem: StoryViewParam): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: StoryViewParam, newItem: StoryViewParam): Boolean {
+            return oldItem == newItem
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryViewHolder {
         return StoryViewHolder(
@@ -29,10 +41,10 @@ class StoryAdapter(private val listStory: ArrayList<StoryViewParam>) :
     }
 
     override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
-        holder.bindItem(listStory[position])
+        with(holder) {
+            getItem(position)?.let { bindItem(it) }
+        }
     }
-
-    override fun getItemCount(): Int = listStory.size
 
     class StoryViewHolder(private val binding: ItemStoryBinding) :
         RecyclerView.ViewHolder(binding.root) {

@@ -74,17 +74,26 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:paddingTop="@dimen/dimens_8dp"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/item_story" />
+
+            <ProgressBar
+                android:id="@+id/pbLoadMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/rvStories"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/shimmerCard"
                 android:layout_width="@dimen/dimens_0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
