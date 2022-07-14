@@ -8,8 +8,11 @@ import java.io.File
 
 interface StoriesRepositoryContract {
     fun getStories(): Flow<PagingData<StoryViewParam>>
+    fun getStoriesWithLocation(): Flow<States<List<StoryViewParam>>>
     suspend fun createStories(
         description: String,
-        image: File
+        image: File,
+        latitude: Double? = null,
+        longitude: Double?= null
     ): Flow<States<Boolean>>
 }

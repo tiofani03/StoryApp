@@ -26,4 +26,6 @@
     <color name="gray_disable_field">#EFEFEF</color>
     <color name="grayscale_stroke">#D0D0D0</color>
 
+    <color name="bg_detail">#66459F90</color>
+
 </resources>

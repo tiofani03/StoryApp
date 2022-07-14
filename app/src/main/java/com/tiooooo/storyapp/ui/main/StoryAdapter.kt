@@ -16,6 +16,7 @@ import com.tiooooo.core.utils.extensions.toDateString
 import com.tiooooo.storyapp.R
 import com.tiooooo.storyapp.databinding.ItemStoryBinding
 import com.tiooooo.storyapp.ui.detail.DetailStoryActivity
+import com.tiooooo.storyapp.ui.detail.DetailStoryWithoutMapActivity
 
 class StoryAdapter :
     PagingDataAdapter<StoryViewParam, StoryAdapter.StoryViewHolder>(Companion) {
@@ -59,7 +60,7 @@ class StoryAdapter :
                     )
 
                 ivStories.load(storyViewParam.photoUrl) {
-                    placeholder(R.drawable.ic_launcher_background)
+                    placeholder(com.tiooooo.core.R.drawable.ic_image_load)
                 }
 
 
@@ -72,13 +73,31 @@ class StoryAdapter :
                             Pair(tvDate, "tvDate"),
                             Pair(tvContent, "tvContent")
                         )
-                    (itemView.context as Activity).startActivity(
-                        Intent(itemView.context, DetailStoryActivity::class.java).putExtra(
-                            DetailStoryActivity.EXTRA_STORY,
-                            storyViewParam
-                        ), optionsCompat.toBundle()
-                    )
+                    val isEmptyLocation = storyViewParam.lat == 0.0 && storyViewParam.lon == 0.0
+                    navigateToDetail(isEmptyLocation, storyViewParam, optionsCompat)
                 }
+            }
+        }
+
+        private fun navigateToDetail(
+            isEmptyLocation: Boolean,
+            storyViewParam: StoryViewParam,
+            optionsCompat: ActivityOptionsCompat
+        ) {
+            if (!isEmptyLocation) {
+                (itemView.context as Activity).startActivity(
+                    Intent(itemView.context, DetailStoryActivity::class.java).putExtra(
+                        DetailStoryActivity.EXTRA_STORY,
+                        storyViewParam
+                    ), optionsCompat.toBundle()
+                )
+            } else {
+                (itemView.context as Activity).startActivity(
+                    Intent(itemView.context, DetailStoryWithoutMapActivity::class.java).putExtra(
+                        DetailStoryWithoutMapActivity.EXTRA_STORY,
+                        storyViewParam
+                    ), optionsCompat.toBundle()
+                )
             }
         }
 

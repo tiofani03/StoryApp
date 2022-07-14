@@ -1,7 +1,6 @@
 package com.tiooooo.storyapp.ui.main
 
 import android.content.Intent
-import android.view.animation.AnimationUtils
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +11,7 @@ import com.tiooooo.storyapp.R
 import com.tiooooo.storyapp.databinding.ActivityMainBinding
 import com.tiooooo.storyapp.ui.about.AboutActivity
 import com.tiooooo.storyapp.ui.create.CreateStoryActivity
+import com.tiooooo.storyapp.ui.map.MapActivity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,11 +29,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.rvStories.apply {
             this.adapter = pagingAdapter
             layoutManager = LinearLayoutManager(this@MainActivity)
-            val layoutAnimationController = AnimationUtils.loadLayoutAnimation(
-                context,
-                com.tiooooo.core.R.anim.layout_animation_fall_down
-            )
-            this.layoutAnimation = layoutAnimationController
         }
     }
 
@@ -51,12 +46,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             cvProfile.setOnClickListener {
                 startActivity(Intent(this@MainActivity, AboutActivity::class.java))
             }
+
+            cvMap.setOnClickListener {
+                startActivity(Intent(this@MainActivity, MapActivity::class.java))
+            }
         }
     }
 
     override fun setSubscribeToLiveData() {
-        with(viewModel) {
-            listStories.observe(this@MainActivity) {
+            viewModel.listStories.observe(this@MainActivity) {
                 lifecycleScope.launch {
                     pagingAdapter.submitData(it)
                 }
@@ -82,8 +80,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
                 }
             }
-
-        }
     }
 
     override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)

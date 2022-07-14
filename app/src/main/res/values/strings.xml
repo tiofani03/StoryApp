@@ -69,4 +69,9 @@
     <string name="login_failed">Login gagal</string>
     <string name="login_success">Login berhasil</string>
     <string name="cannot_fetch_data">Tidak dapat mengambil data</string>
+    <string name="text_story_based_location">Story berdasar lokasi</string>
+    <string name="text_edit_photo">Ketuk untuk mengubah foto</string>
+    <string name="text_location">Lokasi</string>
+    <string name="text_add_photo">Tambahkan Foto</string>
+    <string name="text_take_photo">Sentuh untuk mengambil foto</string>
 </resources>

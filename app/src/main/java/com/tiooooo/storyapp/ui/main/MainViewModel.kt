@@ -20,8 +20,29 @@ class MainViewModel(
     val listStories : LiveData<PagingData<StoryViewParam>> get() = _stories
 
     fun getStories() = viewModelScope.launch {
-        storiesRepositoryContract.getStories().collectLatest {
+        storiesRepositoryContract.getStories().cachedIn(viewModelScope).collectLatest {
             _stories.value = it
+        }
+    }
+
+
+    private val _storiesMap = MutableLiveData<List<StoryViewParam>>()
+    val listStoriesMap : LiveData<List<StoryViewParam>> get() = _storiesMap
+    fun getStoriesWithLocation() = viewModelScope.launch {
+        storiesRepositoryContract.getStoriesWithLocation().collectLatest {
+            when (it) {
+                is States.Loading -> {
+
+                }
+                is States.Success -> {
+                    it.data?.let { data ->
+                        _storiesMap.value = data
+                    }
+                }
+                is States.Error -> {
+
+                }
+            }
         }
     }
 }

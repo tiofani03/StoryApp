@@ -30,13 +30,32 @@ class StoriesRepository(private val service: StoriesService) : StoriesRepository
         ).flow
     }
 
-    override suspend fun createStories(description: String, image: File): Flow<States<Boolean>> =
+    override fun getStoriesWithLocation(): Flow<States<List<StoryViewParam>>> =
+        flow {
+            try {
+                emit(States.Loading())
+                val res = service.getStories(location = 1)
+                emit(States.Success(res.listStory?.map { it.toClean() } ?: emptyList()))
+            } catch (e: Exception) {
+                emit(States.Error(e.getErrorMessage()))
+                Timber.e(e.getErrorMessage())
+            }
+        }.flowOn(Dispatchers.IO)
+
+    override suspend fun createStories(
+        description: String,
+        image: File,
+        latitude: Double?,
+        longitude: Double?
+    ): Flow<States<Boolean>> =
         flow {
             try {
                 emit(States.Loading())
                 val desReq = description.toRequestBody()
                 val photo = image.toPart("photo")
-                val response = service.createStories(desReq, photo)
+                val lat = latitude.toString().toRequestBody()
+                val lon = longitude.toString().toRequestBody()
+                val response = service.createStories(desReq, photo, lat, lon)
                 emit(States.Success(response.isError ?: false))
             } catch (e: Exception) {
                 emit(States.Error(e.getErrorMessage()))
