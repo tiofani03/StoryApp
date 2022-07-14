@@ -1,15 +1,28 @@
 package com.tiooooo.storyapp.ui.create
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.BitmapFactory
+import android.location.Address
+import android.location.Geocoder
 import android.net.Uri
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.MarkerOptions
 import com.tiooooo.core.ui.base.BaseActivity
 import com.tiooooo.core.ui.camera.CameraActivity
 import com.tiooooo.core.utils.constant.InfoEnum
@@ -20,15 +33,23 @@ import com.tiooooo.core.utils.extensions.uriToFile
 import com.tiooooo.storyapp.R
 import com.tiooooo.storyapp.databinding.ActivityAddStoryBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 import java.io.File
+import java.util.Locale
 
-class CreateStoryActivity : BaseActivity<ActivityAddStoryBinding>() {
+class CreateStoryActivity : BaseActivity<ActivityAddStoryBinding>(), OnMapReadyCallback {
     override fun getViewBinding() = ActivityAddStoryBinding.inflate(layoutInflater)
     private val viewModel: CreateStoryViewModel by viewModel()
     private var getFile: File? = null
+    private lateinit var mMap: GoogleMap
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun initView() {
         isUsingToolbar(binding.toolbar, true)
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
                 this,
@@ -120,6 +141,7 @@ class CreateStoryActivity : BaseActivity<ActivityAddStoryBinding>() {
             getFile = myFile
 
             binding.ivStoriesPreview.setImageBitmap(result)
+            binding.tvTextPhoto.text = getString(R.string.text_edit_photo)
         }
     }
 
@@ -139,6 +161,7 @@ class CreateStoryActivity : BaseActivity<ActivityAddStoryBinding>() {
             val myFile = uriToFile(selectedImg, this)
             getFile = myFile
             binding.ivStoriesPreview.setImageURI(selectedImg)
+            binding.tvTextPhoto.text = getString(R.string.text_edit_photo)
         }
     }
 
@@ -183,7 +206,80 @@ class CreateStoryActivity : BaseActivity<ActivityAddStoryBinding>() {
         const val ADD_STORY_CODE = 100
         const val ADD_STORY_STATE = "state"
 
-        private val REQUIRED_PERMISSIONS = arrayOf(android.Manifest.permission.CAMERA)
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+        setMapStyle()
+        getMyLocation()
+        mMap.uiSettings.apply {
+            isScrollGesturesEnabled = false
+            isZoomControlsEnabled = false
+            isIndoorLevelPickerEnabled = false
+            isCompassEnabled = false
+            isMapToolbarEnabled = false
+            isZoomGesturesEnabled = false
+        }
+
+    }
+
+    private fun setMapStyle() {
+        try {
+            val success =
+                mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map))
+            if (!success) {
+                Timber.e("Style parsing failed.")
+            }
+        } catch (exception: Resources.NotFoundException) {
+            Timber.e("Can't find style. Error: $exception")
+        }
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                getMyLocation()
+            } else snackBar(getString(R.string.permission_denied), InfoEnum.DANGER)
+        }
+
+    private fun getMyLocation() {
+        if (ContextCompat.checkSelfPermission(
+                this.applicationContext,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            mMap.isMyLocationEnabled = true
+            fusedLocationClient.lastLocation.addOnSuccessListener {
+                it?.let {
+                    val position = LatLng(it.latitude, it.longitude)
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 15f))
+                    mMap.addMarker(MarkerOptions().position(position))
+                    setUpLocation(it.latitude, it.longitude)
+
+                    viewModel.latitude = it.latitude
+                    viewModel.longitude = it.longitude
+                }
+            }
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+    }
+
+    private fun setUpLocation(latitude: Double, longitude: Double) {
+        try {
+            val currentLatLong =
+                LatLng(latitude, longitude)
+            val geocoder = Geocoder(this, Locale.getDefault())
+            val addresses: List<Address> =
+                geocoder.getFromLocation(currentLatLong.latitude, currentLatLong.longitude, 1)
+
+            binding.tvLocation.text = addresses[0].getAddressLine(0)
+        } catch (err: Exception) {
+            Timber.e(err)
+        }
     }
 }

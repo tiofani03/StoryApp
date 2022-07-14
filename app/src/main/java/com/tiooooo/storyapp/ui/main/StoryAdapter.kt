@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.tiooooo.core.model.StoryViewParam
@@ -14,9 +16,20 @@ import com.tiooooo.core.utils.extensions.toDateString
 import com.tiooooo.storyapp.R
 import com.tiooooo.storyapp.databinding.ItemStoryBinding
 import com.tiooooo.storyapp.ui.detail.DetailStoryActivity
+import com.tiooooo.storyapp.ui.detail.DetailStoryWithoutMapActivity
 
-class StoryAdapter(private val listStory: ArrayList<StoryViewParam>) :
-    RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
+class StoryAdapter :
+    PagingDataAdapter<StoryViewParam, StoryAdapter.StoryViewHolder>(Companion) {
+
+    companion object : DiffUtil.ItemCallback<StoryViewParam>() {
+        override fun areItemsTheSame(oldItem: StoryViewParam, newItem: StoryViewParam): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: StoryViewParam, newItem: StoryViewParam): Boolean {
+            return oldItem == newItem
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryViewHolder {
         return StoryViewHolder(
@@ -29,10 +42,10 @@ class StoryAdapter(private val listStory: ArrayList<StoryViewParam>) :
     }
 
     override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
-        holder.bindItem(listStory[position])
+        with(holder) {
+            getItem(position)?.let { bindItem(it) }
+        }
     }
-
-    override fun getItemCount(): Int = listStory.size
 
     class StoryViewHolder(private val binding: ItemStoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -47,7 +60,7 @@ class StoryAdapter(private val listStory: ArrayList<StoryViewParam>) :
                     )
 
                 ivStories.load(storyViewParam.photoUrl) {
-                    placeholder(R.drawable.ic_launcher_background)
+                    placeholder(com.tiooooo.core.R.drawable.ic_image_load)
                 }
 
 
@@ -60,13 +73,31 @@ class StoryAdapter(private val listStory: ArrayList<StoryViewParam>) :
                             Pair(tvDate, "tvDate"),
                             Pair(tvContent, "tvContent")
                         )
-                    (itemView.context as Activity).startActivity(
-                        Intent(itemView.context, DetailStoryActivity::class.java).putExtra(
-                            DetailStoryActivity.EXTRA_STORY,
-                            storyViewParam
-                        ), optionsCompat.toBundle()
-                    )
+                    val isEmptyLocation = storyViewParam.lat == 0.0 && storyViewParam.lon == 0.0
+                    navigateToDetail(isEmptyLocation, storyViewParam, optionsCompat)
                 }
+            }
+        }
+
+        private fun navigateToDetail(
+            isEmptyLocation: Boolean,
+            storyViewParam: StoryViewParam,
+            optionsCompat: ActivityOptionsCompat
+        ) {
+            if (!isEmptyLocation) {
+                (itemView.context as Activity).startActivity(
+                    Intent(itemView.context, DetailStoryActivity::class.java).putExtra(
+                        DetailStoryActivity.EXTRA_STORY,
+                        storyViewParam
+                    ), optionsCompat.toBundle()
+                )
+            } else {
+                (itemView.context as Activity).startActivity(
+                    Intent(itemView.context, DetailStoryWithoutMapActivity::class.java).putExtra(
+                        DetailStoryWithoutMapActivity.EXTRA_STORY,
+                        storyViewParam
+                    ), optionsCompat.toBundle()
+                )
             }
         }
 

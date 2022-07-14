@@ -12,12 +12,15 @@
         <entry key="app/src/main/res/drawable/bg_white_stoke_grey_r4.xml" value="0.1535" />
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.27794871794871795" />
-        <entry key="app/src/main/res/layout/activity_add_story.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/activity_add_story.xml" value="0.3145919799804688" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.28229166666666666" />
-        <entry key="app/src/main/res/layout/activity_detail_story.xml" value="0.2760879516601562" />
+        <entry key="app/src/main/res/layout/activity_detail_story.xml" value="0.340129749768304" />
+        <entry key="app/src/main/res/layout/activity_detail_story_without_map.xml" value="0.2682291666666667" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/activity_map.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/fragment_detail_story_with_map.xml" value="0.2682291666666667" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.30005645751953125" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.28229166666666666" />
@@ -25,9 +28,13 @@
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.14377441406249997" />
         <entry key="app/src/main/res/layout/fragment_welcome.xml" value="0.13336791992187502" />
         <entry key="app/src/main/res/layout/item_story.xml" value="0.252740478515625" />
+        <entry key="app/src/main/res/layout/layout_detail.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.27794871794871795" />
         <entry key="core/src/main/res/drawable/bg_white_rounded_4dp_stroke_red.xml" value="0.1295" />
+        <entry key="core/src/main/res/drawable/dotted_line.xml" value="0.225" />
+        <entry key="core/src/main/res/drawable/ic_camera_solid.xml" value="0.225" />
         <entry key="core/src/main/res/drawable/ic_capture.xml" value="0.1305" />
+        <entry key="core/src/main/res/drawable/ic_pin_location.xml" value="0.1945" />
         <entry key="core/src/main/res/drawable/ic_switch_camera.xml" value="0.1305" />
         <entry key="core/src/main/res/layout/activity_camera.xml" value="0.27794871794871795" />
         <entry key="core/src/main/res/layout/item_story.xml" value="0.1" />

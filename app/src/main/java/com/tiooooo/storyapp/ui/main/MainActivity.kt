@@ -1,24 +1,35 @@
 package com.tiooooo.storyapp.ui.main
 
 import android.content.Intent
-import android.view.View
-import android.view.animation.AnimationUtils
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tiooooo.core.ui.base.BaseActivity
+import com.tiooooo.storyapp.R
 import com.tiooooo.storyapp.databinding.ActivityMainBinding
 import com.tiooooo.storyapp.ui.about.AboutActivity
 import com.tiooooo.storyapp.ui.create.CreateStoryActivity
+import com.tiooooo.storyapp.ui.map.MapActivity
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
     private val viewModel: MainViewModel by viewModel()
+    private lateinit var pagingAdapter: StoryAdapter
 
 
     override fun initView() {
         viewModel.getStories()
         setSupportActionBar(binding.toolbar)
+
+        pagingAdapter = StoryAdapter()
+        binding.rvStories.apply {
+            this.adapter = pagingAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity)
+        }
     }
 
     override fun initListener() {
@@ -35,41 +46,40 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             cvProfile.setOnClickListener {
                 startActivity(Intent(this@MainActivity, AboutActivity::class.java))
             }
+
+            cvMap.setOnClickListener {
+                startActivity(Intent(this@MainActivity, MapActivity::class.java))
+            }
         }
     }
 
     override fun setSubscribeToLiveData() {
-        with(viewModel) {
-            listStories.observe(this@MainActivity) {
-                binding.layoutErrorMain.root.isVisible = false
-                binding.rvStories.apply {
-                    isVisible = it.isNotEmpty()
-                    adapter = StoryAdapter(it)
-                    layoutManager = LinearLayoutManager(this@MainActivity)
-                    val layoutAnimationController = AnimationUtils.loadLayoutAnimation(
-                        context,
-                        com.tiooooo.core.R.anim.layout_animation_fall_down
-                    )
-                    this.layoutAnimation = layoutAnimationController
+            viewModel.listStories.observe(this@MainActivity) {
+                lifecycleScope.launch {
+                    pagingAdapter.submitData(it)
                 }
             }
 
-            listState.observe(this@MainActivity) {
-                binding.shimmerCard.isVisible = it
-                binding.layoutErrorMain.root.isVisible = false
-            }
+            lifecycleScope.launch {
+                pagingAdapter.loadStateFlow.collectLatest {
+                    val isEmpty =
+                        it.source.refresh is LoadState.NotLoading && it.append.endOfPaginationReached && pagingAdapter.itemCount < 1
+                    with(binding) {
+                        shimmerCard.isVisible = it.refresh is LoadState.Loading
+                        pbLoadMore.isVisible = it.append is LoadState.Loading
+                        layoutErrorMain.root.isVisible = it.refresh is LoadState.Error
+                        rvStories.isVisible = it.refresh is LoadState.NotLoading && !isEmpty
 
-            listError.observe(this@MainActivity) {
-                binding.rvStories.visibility = View.GONE
-                binding.layoutErrorMain.root.isVisible = it.isNotEmpty()
-                binding.layoutErrorMain.apply {
-                    tvInfo.text = it
-                    btnTryAgain.setOnClickListener {
-                        initView()
+                        layoutErrorMain.apply {
+                            tvInfo.text = getString(R.string.cannot_fetch_data)
+                            btnTryAgain.setOnClickListener {
+                                viewModel.getStories()
+                            }
+                        }
                     }
+
                 }
             }
-        }
     }
 
     override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)

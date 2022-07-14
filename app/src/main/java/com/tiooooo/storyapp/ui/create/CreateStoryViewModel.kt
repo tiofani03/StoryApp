@@ -21,10 +21,16 @@ class CreateStoryViewModel(
     val createStoriesState: LiveData<Boolean> get() = _createStoriesState
     val createStories: LiveData<Boolean> get() = _createStories
     val createStoriesError: LiveData<String> get() = _createStoriesError
-    fun createStories(email: String, image: File) = viewModelScope.launch {
+
+    var latitude : Double? = null
+    var longitude : Double? = null
+
+    fun createStories(description: String, image: File) = viewModelScope.launch {
         storiesRepositoryContract.createStories(
-            email,
-            image
+            description,
+            image,
+            latitude,
+            longitude
         ).collectLatest {
             when (it) {
                 is States.Loading -> _createStoriesState.value = true

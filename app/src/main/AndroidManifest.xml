@@ -9,6 +9,8 @@
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".MyApplication"
@@ -21,6 +23,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StoryApp"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.detail.DetailStoryWithoutMapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.map.MapActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCVn436n6Ac9SXIRH6KAmYBqDX_UfkeZrE" />
+
         <activity
             android:name=".ui.about.AboutActivity"
             android:exported="false" />
